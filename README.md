@@ -1,5 +1,5 @@
 # Tic-Tac-Toe - fog of war version, with trained AI enemy
-Tic-Tac-Toe but you have fog of war (limited knowledge on oponent's position)
+Tic-Tac-Toe (fog of war) AI agent developed using MCS
 
 Using self-modified Monte Carlo Simulation with decreasing candidates number and increasing estimations accuracy i found best sequence for Fog of war version of tic-tac-toe
 
