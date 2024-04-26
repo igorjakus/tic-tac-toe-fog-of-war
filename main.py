@@ -7,9 +7,13 @@ class App:
         self.running = True
         self.window = None
 
+        # set icon
         icon = pygame.image.load("assets/icon.png")
         pygame.display.set_icon(icon)
         pygame.display.set_caption("TicTacToe - fog of war @igorjakus")
+
+        # create a surface on screen that has the size of 800 x 800
+        screen = pygame.display.set_mode((800, 800))
 
     def on_event(self, event):
         """Handles all events"""
