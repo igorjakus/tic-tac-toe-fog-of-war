@@ -3,7 +3,9 @@
 Make all strategies (permutations) play 50 games, cut off 90% of worst.
 Then remaining strategies play 50 * 2^i games, cut of 90% of worst for each iteration i
 
-Save about 5 best strategies for first and second player, and AI agnet will play random of them"""
+Save about 5 best strategies for first and second player, and AI agnet will play random of them
+
+Warning!!! It takes a lot of time to train that model. It is recommended to use pypy3 instead"""
 
 import tic_tac_toe
 
