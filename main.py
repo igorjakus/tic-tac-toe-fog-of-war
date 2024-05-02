@@ -152,27 +152,59 @@ class Board:
         self.board = [[0] * grid_size for __ in range(grid_size)]
 
         # perspective of first/second player (includes fog)
-        self.board = [[0] * grid_size for __ in range(grid_size)]
-        self.board = [[0] * grid_size for __ in range(grid_size)]
+        self.first_player = [[0] * grid_size for __ in range(grid_size)]
+        self.second_player = [[0] * grid_size for __ in range(grid_size)]
 
     def reset(self):
         self.__init__(self.grid_size)
 
-    def get_first_player():
-        pass
-
-    def get_second_player():
-        pass
-
-    def update(player, attempted_move):
-        """ Updates boards based on attempted move """
-        pass
+    def update(self, player, attempted_move):
+        """Updates boards based on attempted move"""
+        FIRST = True
+        SECOND = False
+        i, j = attempted_move
+        
+        updated = False
+        
+        if player is FIRST:
+            # update fog and actual board
+            if self.board[i][j] == 0:
+                self.board[i][j] = 1
+                self.first_player[i][j] = 1
+            # update fog
+            elif self.board[i][j] == -1:
+                self.first_player[i][j] = -1
+                
+        elif player is SECOND:
+            # update fog and actual board
+            if self.board[i][j] == 0:
+                self.board[i][j] = -1
+                self.second_player[i][j] = -1
+            # update fog
+            elif self.board[i][j] == 1:
+                self.second_player[i][j] = 1
+    
+        return updated
 
     @staticmethod
-    def at_linear(x, y, grid_size=3):
+    def selected_square(x, y, cell_size):
+        """Gives (i, j) of selected square by mouse"""
+        i = x // cell_size
+        j = y // cell_size
+        return i, j
+
+    @staticmethod
+    def at_cartesian(index, grid_size=3):
+        """Linear index to cartesian point (x, y)"""
+        i = index % grid_size
+        j = index // grid_size
+        return i, j
+
+    @staticmethod
+    def at_linear(i, j, grid_size=3):
         """Cartesian (x,y) to linear index i
         Ex. (1, 0) -> 1, (2,2) -> 8"""
-        return y * grid_size + x
+        return j * grid_size + i
 
 
 if __name__ == "__main__":
