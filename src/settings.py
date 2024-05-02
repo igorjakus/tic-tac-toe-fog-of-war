@@ -6,5 +6,5 @@ def set_default_settings():
     settings["window_size"] = 700
     settings["grid_size"] = 3
 
-    with open("settings.json", "w") as file:
+    with open("../settings.json", "w") as file:
         json.dump(settings, file)
