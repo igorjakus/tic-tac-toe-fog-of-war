@@ -1,7 +1,12 @@
 # Tic-Tac-Toe - fog of war version, with trained AI enemy
 Tic-Tac-Toe (fog of war) AI agent developed using MCS
 
+## Warning! 
+Only train_ai.py, test_ai.py, and tic_tac_toe.py are currently working!
+
+## Idea
 Using self-modified Monte Carlo Simulation with decreasing candidates number and increasing estimations accuracy i found best sequence for Fog of war version of tic-tac-toe
+
 
 ## Rules
 Let's consider a game of tic-tac-toe with fog of war. 
