@@ -10,7 +10,6 @@ class App:
         )  # later get it from settings.json
 
         self.board = Board(grid_size=3)
-        self.board = [[0, 0, 0] for __ in range(3)]
 
         self.player = True  # first := True, second := False
 
@@ -42,7 +41,7 @@ class App:
         self.player = not self.player
 
     def _on_render(self):
-        self.window.draw(self.board)
+        self.window.draw(self.board.board)
         pygame.display.flip()
 
     def _on_cleanup(self):
