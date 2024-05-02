@@ -1,16 +1,15 @@
 import pygame
-from window import Window
-from board import Board
-# from input import InputHandler
+from src.window import Window
+from src.board import Board
+# from src.input import InputHandler
 
 
 class App:
     def __init__(self):
         pygame.init()
         self.running = True
-        self.window = Window(
-            shape=(700, 700), grid_size=3
-        )  # later get it from settings.json
+        self.window = Window(shape=(700, 700), grid_size=3)
+        # later get it from settings.json
 
         self.board = Board(grid_size=3)
 
@@ -33,7 +32,14 @@ class App:
     def _handle_mouse(self):
         # get mouse position
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        i, j = Board.selected_square(mouse_x, mouse_y, cell_size=700 // 3)
+        print(mouse_x, mouse_y)
+
+        # get selected square
+        r, c = Board.selected_square(mouse_x, mouse_y, cell_size=700 // 3)
+
+        # update board
+        if self.board.update(self.player, (r, c)):
+            self.player = not self.player  # update player
 
     def _handle_keydown(self, event):
         if event.key == pygame.K_q:
@@ -61,8 +67,3 @@ class App:
             self._on_loop()
             self._on_render()
         self._on_cleanup()
-
-
-if __name__ == "__main__":
-    app = App()
-    app.run()

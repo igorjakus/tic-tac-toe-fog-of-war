@@ -11,7 +11,7 @@ class Window:
         self.cell_size = shape[0] // grid_size
 
         # setup icon
-        icon = pygame.image.load("../assets/icon.png")
+        icon = pygame.image.load("assets/icon.png")
         pygame.display.set_icon(icon)
         pygame.display.set_caption("TicTacToe - fog of war @igorjakus")
 

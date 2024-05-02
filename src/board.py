@@ -23,45 +23,45 @@ class Board:
 
     def update(self, player, attempted_move):
         """Updates boards based on attempted move"""
-        i, j = attempted_move
+        r, c = attempted_move
 
         updated = False
 
         if player is FIRST:
             # update fog and actual board
-            if self.board[i][j] == 0:
-                self.board[i][j] = 1
-                self.first_player[i][j] = 1
+            if self.board[r][c] == 0:
+                self.board[r][c] = 1
+                self.first_player[r][c] = 1
                 updated = True
             # update fog
-            elif self.board[i][j] == -1:
-                self.first_player[i][j] = -1
+            elif self.board[r][c] == -1:
+                self.first_player[r][c] = -1
 
         elif player is SECOND:
             # update fog and actual board
-            if self.board[i][j] == 0:
-                self.board[i][j] = -1
-                self.second_player[i][j] = -1
-                updated = False
+            if self.board[r][c] == 0:
+                self.board[r][c] = -1
+                self.second_player[r][c] = -1
+                updated = True
             # update fog
-            elif self.board[i][j] == 1:
-                self.second_player[i][j] = 1
+            elif self.board[r][c] == 1:
+                self.second_player[r][c] = 1
 
         return updated
 
     @staticmethod
     def selected_square(x, y, cell_size):
         """Gives (i, j) of selected square by mouse"""
-        i = x // cell_size
-        j = y // cell_size
-        return i, j
+        row = y // cell_size 
+        col = x // cell_size
+        return row, col
 
     @staticmethod
     def at_cartesian(index, grid_size=3):
         """Linear index to cartesian point (x, y)"""
-        i = index % grid_size
-        j = index // grid_size
-        return i, j
+        row = index // grid_size
+        col = index % grid_size
+        return row, col
 
     @staticmethod
     def at_linear(i, j, grid_size=3):

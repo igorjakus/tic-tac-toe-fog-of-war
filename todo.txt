@@ -1,4 +1,6 @@
 Frontend cały
+Ustawienia
+InputHandler
 Wczytywanie / zapisywanie z/do pliku
 Uczenie na mądrzejszym niż losowy przeciwnik potencjalnie
 Zaimplementowanie losowego przeciwnika
