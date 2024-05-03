@@ -15,73 +15,83 @@ class Window:
         pygame.display.set_icon(icon)
         pygame.display.set_caption("TicTacToe - fog of war @igorjakus")
 
-    def draw(self, board):
-        self._draw_board()
-        self._draw_symbols(board)
-        self._draw_fog(board)
+        # load fog image
+        fog_img = pygame.image.load("assets/fog.png")
+        self.margin = 0.9
+        self.fog_img = pygame.transform.smoothscale(
+            fog_img, (self.cell_size * self.margin, self.cell_size * self.margin)
+        )
 
-    def _draw_board(self):
+    def draw(self, board):
+        BLACK = (0, 0, 0)
+
+        def draw_circle(row, col):
+            pygame.draw.circle(
+                self.screen,
+                BLACK,
+                (
+                    col * self.cell_size + self.cell_size // 2,
+                    row * self.cell_size + self.cell_size // 2,
+                ),
+                self.cell_size // 3,
+                5,
+            )
+
+        def draw_cross(row, col):
+            pygame.draw.line(
+                self.screen,
+                BLACK,
+                (col * self.cell_size + 20, row * self.cell_size + 20),
+                ((col + 1) * self.cell_size - 20, (row + 1) * self.cell_size - 20),
+                5,
+            )
+            pygame.draw.line(
+                self.screen,
+                BLACK,
+                ((col + 1) * self.cell_size - 20, row * self.cell_size + 20),
+                (col * self.cell_size + 20, (row + 1) * self.cell_size - 20),
+                5,
+            )
+
+        def draw_fog(row, col):
+            x = (col + ((1 - self.margin) / 2)) * self.cell_size
+            y = (row + ((1 - self.margin) / 2)) * self.cell_size
+            self.screen.blit(self.fog_img, (x, y))
+
+        # draw grid
+        self._draw_grid()
+
+        # draw circles / crosses / fog
+        for row in range(3):
+            for col in range(3):
+                if board[row][col] == 1:
+                    draw_circle(row, col)
+                elif board[row][col] == -1:
+                    draw_cross(row, col)
+                else:
+                    draw_fog(row, col)
+
+    def _draw_grid(self):
+        """Draw grid lines"""
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
         BOLDNESS = 3
-        CELL_SIZE = self.cell_size
         WINDOW_SIZE = self.shape[0]
 
-        # Rysuj planszę
         self.screen.fill(WHITE)
 
-        # Rysuj linie siatki
         for i in range(1, 3):
             pygame.draw.line(
                 self.screen,
                 BLACK,
-                (0, i * CELL_SIZE),
-                (WINDOW_SIZE, i * CELL_SIZE),
+                (0, i * self.cell_size),
+                (WINDOW_SIZE, i * self.cell_size),
                 BOLDNESS,
             )
             pygame.draw.line(
                 self.screen,
                 BLACK,
-                (i * CELL_SIZE, 0),
-                (i * CELL_SIZE, WINDOW_SIZE),
+                (i * self.cell_size, 0),
+                (i * self.cell_size, WINDOW_SIZE),
                 BOLDNESS,
             )
-
-    # Rysuj znaki na planszy
-    def _draw_symbols(self, board):
-        BLACK = (0, 0, 0)
-        CELL_SIZE = self.cell_size
-
-        for row in range(3):
-            for col in range(3):
-                if board[row][col] == -1:
-                    pygame.draw.line(
-                        self.screen,
-                        BLACK,
-                        (col * CELL_SIZE + 20, row * CELL_SIZE + 20),
-                        ((col + 1) * CELL_SIZE - 20, (row + 1) * CELL_SIZE - 20),
-                        5,
-                    )
-                    pygame.draw.line(
-                        self.screen,
-                        BLACK,
-                        ((col + 1) * CELL_SIZE - 20, row * CELL_SIZE + 20),
-                        (col * CELL_SIZE + 20, (row + 1) * CELL_SIZE - 20),
-                        5,
-                    )
-
-                elif board[row][col] == 1:
-                    pygame.draw.circle(
-                        self.screen,
-                        BLACK,
-                        (
-                            col * CELL_SIZE + CELL_SIZE // 2,
-                            row * CELL_SIZE + CELL_SIZE // 2,
-                        ),
-                        CELL_SIZE // 3,
-                        5,
-                    )
-
-    def _draw_fog(self, board):
-        # draw fog based on player's knowledge
-        pass

@@ -17,3 +17,4 @@ Except that it's a normal tic-tac-toe (i.e. the goal is to arrange 3 of your cha
 
 ###
 Icon by Erifqi Zetiawan[https://www.flaticon.com/free-icons/tic-tac-toe]
+Fog icons created by Freepik - Flaticon[https://www.flaticon.com/free-icons/fog"]
