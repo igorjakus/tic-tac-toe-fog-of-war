@@ -2,13 +2,14 @@ import pygame
 
 
 class Window:
-    def __init__(self, shape, grid_size):
+    def __init__(self, settings):
+        # load settings
+        self.shape = settings.window_shape
+        self.grid_size = settings.grid_size
+        self.cell_size = settings.cell_size
+        
         # setup screen
-        self.screen = pygame.display.set_mode((shape[0], shape[1]))
-
-        self.shape = shape
-        self.grid_size = grid_size
-        self.cell_size = shape[0] // grid_size
+        self.screen = pygame.display.set_mode(self.shape)
 
         # setup icon
         icon = pygame.image.load("assets/icon.png")
@@ -16,8 +17,8 @@ class Window:
         pygame.display.set_caption("TicTacToe - fog of war @igorjakus")
 
         # load fog image
-        fog_img = pygame.image.load("assets/fog.png")
         self.margin = 0.9
+        fog_img = pygame.image.load("assets/fog.png")
         self.fog_img = pygame.transform.smoothscale(
             fog_img, (self.cell_size * self.margin, self.cell_size * self.margin)
         )

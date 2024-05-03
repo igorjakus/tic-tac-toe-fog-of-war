@@ -1,6 +1,7 @@
 import pygame
 from src.window import Window
 from src.board import Board
+from src.settings import Settings
 # from src.input import InputHandler
 
 
@@ -8,12 +9,18 @@ class App:
     def __init__(self):
         pygame.init()
         self.running = True
-        self.window = Window(shape=(700, 700), grid_size=3)
-        # later get it from settings.json
 
-        self.board = Board(grid_size=3)
+        # load settings
+        self.settings = Settings()
+        
+        # create window object
+        self.window = Window(self.settings)
 
-        self.player = True  # first := True, second := False
+        # create board object
+        self.board = Board(self.settings)
+
+        # first := True, second := False
+        self.player = True  
 
     def _on_input(self):
         """Handles all inputs"""

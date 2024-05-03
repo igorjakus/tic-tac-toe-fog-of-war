@@ -1,21 +1,18 @@
-# const
-FIRST = True
-SECOND = False
-
-
 class Board:
-    def __init__(self, grid_size):
-        self.grid_size = grid_size
-
+    def __init__(self, settings):
+        self.grid_size = settings.cell_size  # load settings
+        self._init_boards()  # init boards
+    
+    def _init_boards(self):
         # true board
-        self.board = [[0] * grid_size for __ in range(grid_size)]
+        self.board = [[0] * self.grid_size for __ in range(self.grid_size)]
 
-        # perspective of first/second player (includes fog)
-        self.first_player = [[0] * grid_size for __ in range(grid_size)]
-        self.second_player = [[0] * grid_size for __ in range(grid_size)]
+        # perspective of first / second player (includes fog)
+        self.first_player = [[0] * self.grid_size for __ in range(self.grid_size)]
+        self.second_player = [[0] * self.grid_size for __ in range(self.grid_size)]   
 
     def reset(self):
-        self.__init__(self.grid_size)
+        self._init_boards()
 
     def get_board(self, player):
         """ Return the board of the player whose turn it is """
@@ -25,6 +22,9 @@ class Board:
         """Updates boards based on attempted move"""
         r, c = attempted_move
 
+        FIRST = True
+        SECOND = False
+        
         updated = False
 
         if player is FIRST:
@@ -50,7 +50,7 @@ class Board:
         return updated
 
     @staticmethod
-    def selected_square(x, y, cell_size):
+    def selected_square(x, y, cell_size=3):
         """Gives (i, j) of selected square by mouse"""
         row = y // cell_size 
         col = x // cell_size
